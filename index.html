@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub del Emprendedor Venezolano</title>
+    <style>
+        * { 
+            box-sizing: border-box; 
+            font-family: Arial, sans-serif; 
+        }
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            background: #f0f8ff; 
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        header {
+            text-align: center;
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tab { 
+            display: flex; 
+            flex-wrap: wrap;
+            background: #fff; 
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .tab button {
+            flex: 1;
+            min-width: 120px;
+            background: #f1f1f1;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .tab button:hover { background: #ddd; }
+        .tab button.active { 
+            background: #2c3e50; 
+            color: white;
+        }
+        
+        .tabcontent {
+            display: none;
+            padding: 25px;
+            background: white;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-height: 300px;
+        }
+        .tabcontent.active { display: block; }
+        
+        .cta-button {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 15px 0;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .cta-button:hover { background: #c0392b; }
+        
+        ul { line-height: 1.8; padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚀 Hub del Emprendedor Venezolano</h1>
+        <p>por emprende-venezuela - Toda la información en un solo lugar</p>
+    </header>
+
+    <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, 'tramites')">📄 Trámites</button>
+        <button class="tablinks" onclick="openTab(event, 'financiamiento')">💰 Financiamiento</button>
+        <button class="tablinks" onclick="openTab(event, 'capacitacion')">🎓 Capacitación</button>
+        <button class="tablinks" onclick="openTab(event, 'casos')">💡 Casos de Éxito</button>
+    </div>
+
+    <div id="tramites" class="tabcontent active">
+        <h2>📄 Trámites y Formalización</h2>
+        <p>Guía completa para legalizar tu emprendimiento:</p>
+        <ul>
+            <li><strong>RIF del Emprendedor:</strong> Registro en plataforma "Emprender Juntos"</li>
+            <li><strong>Registro Mercantil:</strong> Para constituir tu empresa formalmente</li>
+            <li><strong>Permisos Sanitarios:</strong> Si manejas alimentos o productos de cuidado personal</li>
+        </ul>
+        <a href="#" class="cta-button">📋 Ver Guía Completa</a>
+    </div>
+
+    <div id="financiamiento" class="tabcontent">
+        <h2>💰 Financiamiento</h2>
+        <p>Enlaces a programas de crédito y apoyo económico:</p>
+        <ul>
+            <li><strong>Banca Pública:</strong> Banco de Venezuela - EmprendeBDV</li>
+            <li><strong>Banca Privada:</strong> Programas Pymes de bancos comerciales</li>
+            <li><strong>Fondos Gubernamentales:</strong> Fondos BANDES, FONDONORME</li>
+        </ul>
+        <a href="#" class="cta-button">💳 Ver Opciones de Crédito</a>
+    </div>
+        <div id="capacitacion" class="tabcontent">
+        <h2>🎓 Capacitación</h2>
+        <p>Aprende las habilidades que necesitas para triunfar:</p>
+        <ul>
+            <li><strong>YouTube:</strong> Próximamente - Nuestro canal con tutoriales</li>
+            <li><strong>Cursos Gratuitos:</strong> INCES, Fundación Empresas Polar</li>
+            <li><strong>Guías Prácticas:</strong> Marketing Digital, Finanzas Básicas</li>
+        </ul>
+        <a href="#" class="cta-button">🎥 Ir al Canal de YouTube</a>
+    </div>
+
+    <div id="casos" class="tabcontent">
+        <h2>💡 Casos de Éxito</h2>
+        <p>Inspírate con estos ejemplos reales:</p>
+        <ul>
+            <li><strong>Emprendimiento Gastronómico:</strong> De cocina casera a negocio establecido</li>
+            <li><strong>Tienda Digital:</strong> Cómo vender productos artesanales online</li>
+            <li><strong>Servicios con IA:</strong> Usando inteligencia artificial para crecer</li>
+        </ul>
+        <a href="#" class="cta-button">🌟 Ver Casos Completos</a>
+    </div>
+
+    <footer>
+        <p>¿Necesitas ayuda específica? Escríbenos</p>
+        <p>© 2024 Hub del Emprendedor Venezolano - emprende-venezuela</p>
+    </footer>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
