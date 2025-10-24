@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprende Venezuela - Para el Pueblo Emprendedor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a5276 0%, #2e86c1 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            padding: 40px 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.3;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .hero-content .highlight {
+            color: #f39c12;
+            font-weight: bold;
+            background: rgba(243, 156, 18, 0.2);
+            padding: 2px 8px;
+            border-radius: 5px;
+        }
+
+        .hero-message {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f39c12;
+            color: #ecf0f1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .hero-message strong {
+            color: #f39c12;
+            font-weight: 600;
+        }
+
+        .promise-box {
+            background: linear-gradient(135deg, #f39c12, #f1c40f);
+            color: #2c3e50;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 700px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid #fff;
+        }
+
+        .promise-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #c0392b;
+            font-weight: 600;
+        }
+
+        .promise-box p {
+            font-size: 1rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .cta-main {
+            padding: 16px 35px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            margin: 1.5rem 0;
+        }
+
+        .cta-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
+        }
+
+        .people-stats {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .people-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px;
+            border-radius: 8px;
+            color: #2c3e50;
+            min-width: 100px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .people-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .people-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: none;
+            border: none;
+            color: #f39c12;
+            font-size: 2rem;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-8px) translateX(-50%);}
+            60% {transform: translateY(-4px) translateX(-50%);}
+        }
+
+        .assistant-explanation {
+            background: rgba(52, 152, 219, 0.9);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: left;
+            border: 2px solid #3498db;
+        }
+
+        .assistant-explanation h3 {
+            color: #f39c12;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+
+        .assistant-explanation p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .assistant-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 30px 15px;
+                min-height: 100vh;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-message {
+                font-size: 1rem;
+                padding: 15px;
+                margin-bottom: 1rem;
+            }
+            
+            .promise-box {
+                padding: 15px;
+                margin: 1.5rem 10px;
+            }
+            
+            .promise-box h3 {
+                font-size: 1.2rem;
+            }
+            
+            .people-stats {
+                gap: 10px;
+            }
+            
+            .people-item {
+                min-width: 85px;
+                padding: 10px;
+            }
+            
+            .assistant-explanation {
+                padding: 20px 15px;
+                margin: 1.5rem 10px;
+            }
+            
+            .assistant-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-main {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        .main-content {
+            background: #ecf0f1;
+            color: #2c3e50;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .main-content h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .content-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #34495e;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>✨ <span class="highlight">Pueblo Emprendedor de Venezuela</span><br>Tu Momento es Ahora</h1>
+            
+            <div class="hero-message">
+                <p><strong>Emprender es el arte venezolano de transformar sueños en realidad.</strong> 
+                   Es esa fuerza que te hace levantar un negocio donde otros ven dificultades, 
+                   esa creatividad que convierte lo simple en extraordinario.</p>
+                   
+                <p>Ya sea con una arepera, un taller, un servicio o una idea digital, 
+                   <strong>tu emprendimiento cuenta, tu esfuerzo inspira, y tu éxito nos fortalece a todos.</strong></p>
+            </div>
+
+            <div class="promise-box">
+                <h3>🎯 Nuestra Promesa para Ti:</h3>
+                <p><strong>"Te acompañamos paso a paso para convertir tus sueños de emprender en una realidad concreta."</strong></p>
+                <p>Sin complicaciones, sin lenguaje difícil, solo <strong>herramientas claras y apoyo real</strong>.</p>
+            </div>
+
+            <div class="assistant-explanation">
+                <h3>💬 ¿Qué es Nuestro Asistente Virtual?</h3>
+                <p><strong>No es una persona, es tu ayudante digital</strong> disponible 24/7 para responder tus dudas al instante.</p>
+                
+                <p><strong>Es como un amigo que sabe mucho de trámites y negocios</strong>, pero que nunca se cansa de ayudarte. Puedes preguntarle:</p>
+                
+                <div class="assistant-features">
+                    <div class="feature">
+                        <div class="feature-icon">📋</div>
+                        <div>"¿Qué papeles necesito para mi negocio?"</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💰</div>
+                        <div>"¿Dónde puedo conseguir un crédito?"</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎓</div>
+                        <div>"¿Cómo aprendo a vender por internet?"</div>
+                    </div>
+                </div>
+                
+                <p><strong>No te preocupes:</strong> Es completamente gratis, no necesita registro y puedes preguntar las veces que quieras.</p>
+            </div>
+
+            <button class="cta-main" onclick="scrollToContent()">
+                🚀 Quiero Empezar Mi Camino
+            </button>
+
+            <div class="people-stats">
+                <div class="people-item">
+                    <div class="people-icon">👨‍🍳</div>
+                    <div class="people-label">Cocineros<br>Triunfando</div>
+                </div>
+                <div class="people-item">
+                    <div class="people-icon">👩‍🏭</div>
+                    <div class="people-label">Artesanos<br>Creciendo</div>
+                </div>
+                <div class="people-item">
+                    <div class="people-icon">👨‍💻</div>
+                    <div class="people-label">Digitales<br>Innovando</div>
+                </div>
+                <div class="people-item">
+                    <div class="people-icon">🌟</div>
+                    <div class="people-label">Tú Eres<br>El Próximo</div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="scroll-indicator" onclick="scrollToContent()">▼</button>
+    </section>
+
+    <div class="main-content">
+        <h2>Tu Guía Completa para Emprender en Venezuela</h2>
+        
+        <div class="content-text">
+            <p><strong>Diseñado específicamente para venezolanos que usan principalmente teléfonos móviles.</strong></p>
+            
+            <p>Sabemos que la mayoría de nuestros emprendedores acceden desde sus celulares, por eso:</p>
+            
+            <ul style="margin: 15px 0; padding-left: 20px;">
+                <li><strong>Textos legibles</strong> con buen contraste</li>
+                <li><strong>Botones grandes</strong> fáciles de tocar</li>
+                <li><strong>Navegación simple</strong> sin complicaciones</li>
+                <li><strong>Sin letras muy pequeñas</strong> que cansen la vista</li>
+            </ul>
+            
+            <p>Todo optimizado para que tu experiencia sea agradable y productiva, incluso con conexiones lentas.</p>
+        </div>
+    </div>
+
+    <script>
+        function scrollToContent() {
+            document.querySelector('.main-content').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.hero-content > *');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(15px)';
+                
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
