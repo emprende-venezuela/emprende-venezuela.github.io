@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprende Venezuela - Portal Oficial del Emprendedor</title>
+    <style>
+        /* ESTILOS INSPIRADOS EN IESA - SOBRIOS Y PROFESIONALES */
+        :root {
+            --primary-blue: #1a365d;
+            --secondary-blue: #2d3748;
+            --accent-gold: #d4af37;
+            --light-gray: #f7fafc;
+            --dark-gray: #4a5568;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--secondary-blue);
+            line-height: 1.6;
+        }
+
+        /* HEADER PROFESIONAL COMO IESA */
+        .header {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--accent-gold);
+        }
+
+        /* NAVEGACIÓN SUPERIOR ELEGANTE */
+        .nav-main {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-main a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-main a:hover {
+            color: var(--accent-gold);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* HERO SECTION SOBRIA */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--white);
+            padding: 120px 2rem 80px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
+        }
+
+        /* SECCIONES ESTILO IESA - LIMPIAS Y ORGANIZADAS */
+        .section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* GRID DE SERVICIOS COMO EMPRENDER JUNTOS */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-gold);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-description {
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .service-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-link:hover {
+            color: var(--accent-gold);
+        }
+
+        /* SECCIÓN DE RECURSOS COMO EMPRENDER JUNTOS */
+        .resources-section {
+            background: var(--light-gray);
+            padding: 80px 2rem;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .resource-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .resource-title {
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .resource-description {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-button {
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .download-button:hover {
+            background: var(--secondary-blue);
+        }
+
+        /* SECCIÓN DE VIDEOS FORMATIVOS */
+        .videos-section {
+            padding: 80px 2rem;
+            background: var(--white);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .video-placeholder {
+            background: var(--light-gray);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-gray);
+            font-size: 3rem;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .video-description {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        /* FOOTER PROFESIONAL */
+        .footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* BOTÓN FLOTANTE DE ASISTENCIA */
+        .assistant-floating {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .assistant-floating:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-main {
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 100px 1rem 60px;
+                margin-top: 140px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 60px 1rem;
+            }
+
+            .services-grid,
+            .resources-grid,
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER PROFESIONAL COMO IESA -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">🚀</div>
+                <h1>Emprende Venezuela</h1>
+            </div>
+            <nav class="nav-main">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#recursos">Recursos</a>
+                <a href="#formacion">Formación</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION SOBRIA -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Formación y Recursos para el Éxito Empresarial</h1>
+            <p>Accede a herramientas, capacitación y apoyo gubernamental para hacer crecer tu emprendimiento en Venezuela</p>
+            <button class="cta-button">Comenzar Ahora</button>
+        </div>
+    </section>
+
+    <!-- SERVICIOS PRINCIPALES -->
+    <section class="section" id="servicios">
+        <div class="section-header">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <p class="section-subtitle">Todo lo que necesitas para formalizar y hacer crecer tu negocio</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💰</div>
+                <h3 class="service-title">Financiamiento</h3>
+                <p class="service-description">Accede a programas de crédito de la banca pública y privada, microcréditos y fondos gubernamentales.</p>
+                <a href="#" class="service-link">
+                    Ver opciones 
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📄</div>
+                <h3 class="service-title">Trámites y Formalización</h3>
+                <p class="service-description">Guías completas para registro RIF, constitución de empresas, permisos sanitarios y más trámites esenciales.</p>
+                <a href="#" class="service-link">
+                    Ver trámites 
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎓</div>
+                <h3 class="service-title">Capacitación</h3>
+                <p class="service-description">Cursos, talleres y programas de formación en gestión empresarial, marketing digital y finanzas.</p>
+                <a href="#" class="service-link">
+                    Ver programas 
+                    <span>→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECURSOS DESCARGA BLES COMO EMPRENDER JUNTOS -->
+    <section class="resources-section" id="recursos">
+        <div class="section-header">
+            <h2 class="section-title">Recursos Descargables</h2>
+            <p class="section-subtitle">Documentos oficiales, formularios y guías prácticas</p>
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="resource-icon">📋</div>
+                <h4 class="resource-title">Guía RIF Emprendedor</h4>
+                <p class="resource-description">Procedimiento completo para obtener el Registro de Información Fiscal</p>
+                <button class="download-button">Descargar PDF</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-icon">📊</div>
+                <h4 class="resource-title">Plan de Negocios</h4>
+                <p class="resource-description">Plantilla editable para desarrollar tu plan de negocios paso a paso</p>
+                <button class="download-button">Descargar Plantilla</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-icon">💼</div>
+                <h4 class="resource-title">Formularios Oficiales</h4>
+                <p class="resource-description">Formatos actualizados para trámites ante organismos gubernamentales</p>
+                <button class="download-button">Descargar Formatos</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-icon">📈</div>
+                <h4 class="resource-title">Indicadores Económicos</h4>
+                <p class="resource-description">Reporte mensual de indicadores relevantes para emprendedores</p>
+                <button class="download-button">Descargar Reporte</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE VIDEOS FORMATIVOS -->
+    <section class="videos-section" id="formacion">
+        <div class="section-header">
+            <h2 class="section-title">Formación en Video</h2>
+            <p class="section-subtitle">Aprende con nuestro contenido audiovisual especializado</p>
+        </div>
+
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-placeholder">🎥</div>
+                <div class="video-info">
+                    <h4 class="video-title">Cómo acceder a créditos del Banco de Venezuela</h4>
+                    <p class="video-description">Guía completa para solicitar financiamiento a través de EmprendeBDV</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-placeholder">🎥</div>
+                <div class="video-info">
+                    <h4 class="video-title">Taller: Marketing Digital para Emprendedores</h4>
+                    <p class="video-description">Estrategias básicas para promocionar tu negocio en redes sociales</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-placeholder">🎥</div>
+                <div class="video-info">
+                    <h4 class="video-title">Gestión Financiera para Pequeños Negocios</h4>
+                    <p class="video-description">Aprende a manejar tus finanzas y controlar tus gastos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER PROFESIONAL -->
+    <footer class="footer" id="contacto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Emprende Venezuela</h3>
+                <p>Tu portal oficial para el desarrollo empresarial en Venezuela</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#formacion">Formación</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@emprendevenezuela.com">info@emprendevenezuela.com</a></li>
+                    <li><a href="#">Formulario de Contacto</a></li>
+                    <li><a href="#">Soporte Técnico</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <ul class="footer-links">
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÓN DE ASISTENCIA FLOTANTE -->
+    <div class="assistant-floating">
+        💬
+    </div>
+
+    <script>
+        // Navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efecto de scroll en el header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(26, 54, 93, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--primary-blue)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
