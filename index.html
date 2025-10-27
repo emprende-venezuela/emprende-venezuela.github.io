@@ -3,164 +3,1453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub del Emprendedor Venezolano</title>
+    <title>Emprende Venezuela - Plataforma Integral para Emprendedores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { 
-            box-sizing: border-box; 
-            font-family: Arial, sans-serif; 
+        :root {
+            --primary: #2C3E50;
+            --secondary: #E74C3C;
+            --accent: #2980B9;
+            --light: #F8F9FA;
+            --dark: #2C3E50;
+            --text: #333333;
+            --white: #FFFFFF;
         }
-        body { 
-            margin: 0; 
-            padding: 20px; 
-            background: #f0f8ff; 
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
-        
-        header {
-            text-align: center;
-            background: #2c3e50;
-            color: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
         }
-        
-        .tab { 
-            display: flex; 
-            flex-wrap: wrap;
-            background: #fff; 
-            border-radius: 10px 10px 0 0;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        /* Header estilo IESA */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .tab button {
-            flex: 1;
-            min-width: 120px;
-            background: #f1f1f1;
-            border: none;
-            padding: 15px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-        .tab button:hover { background: #ddd; }
-        .tab button.active { 
-            background: #2c3e50; 
-            color: white;
-        }
-        
-        .tabcontent {
-            display: none;
-            padding: 25px;
-            background: white;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            min-height: 300px;
-        }
-        .tabcontent.active { display: block; }
-        
-        .cta-button {
-            background: #e74c3c;
-            color: white;
-            padding: 12px 25px;
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--primary);
             text-decoration: none;
-            border-radius: 5px;
-            display: inline-block;
-            margin: 15px 0;
-            font-weight: bold;
-            transition: 0.3s;
         }
-        .cta-button:hover { background: #c0392b; }
-        
-        ul { line-height: 1.8; padding-left: 20px; }
-        li { margin-bottom: 10px; }
-        
-        footer {
+
+        .menu-hamburguesa {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+            padding: 0.5rem;
+        }
+
+        /* Menú lateral */
+        .menu-lateral {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 1001;
+            padding: 2rem;
+        }
+
+        .menu-lateral.activo {
+            left: 0;
+        }
+
+        .cerrar-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .nav-links li {
+            margin: 1.5rem 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Overlay para menú */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.activo {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            padding: 8rem 2rem 4rem;
             text-align: center;
-            margin-top: 40px;
-            color: #7f8c8d;
-            padding: 20px;
-            border-top: 1px solid #ddd;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>🚀 Hub del Emprendedor Venezolano</h1>
-        <p>por emprende-venezuela - Toda la información en un solo lugar</p>
+    <!-- Overlay para menú -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="#" class="logo">EMPRENDE VENEZUELA</a>
+        <button class="menu-hamburguesa" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
     </header>
 
-    <div class="tab">
-        <button class="tablinks active" onclick="openTab(event, 'tramites')">📄 Trámites</button>
-        <button class="tablinks" onclick="openTab(event, 'financiamiento')">💰 Financiamiento</button>
-        <button class="tablinks" onclick="openTab(event, 'capacitacion')">🎓 Capacitación</button>
-        <button class="tablinks" onclick="openTab(event, 'casos')">💡 Casos de Éxito</button>
-    </div>
-
-    <div id="tramites" class="tabcontent active">
-        <h2>📄 Trámites y Formalización</h2>
-        <p>Guía completa para legalizar tu emprendimiento:</p>
-        <ul>
-            <li><strong>RIF del Emprendedor:</strong> Registro en plataforma "Emprender Juntos"</li>
-            <li><strong>Registro Mercantil:</strong> Para constituir tu empresa formalmente</li>
-            <li><strong>Permisos Sanitarios:</strong> Si manejas alimentos o productos de cuidado personal</li>
+    <!-- Menú lateral -->
+    <nav class="menu-lateral" id="menuLateral">
+        <button class="cerrar-menu" id="cerrarMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#formacion">Formación</a></li>
+            <li><a href="#creditos">Créditos y Financiamiento</a></li>
+            <li><a href="#recursos">Recursos</a></li>
+            <li><a href="#exitos">Casos de Éxito</a></li>
+            <li><a href="#formularios">Formularios</a></li>
+            <li><a href="#contacto">Contacto</a></li>
         </ul>
-        <a href="#" class="cta-button">📋 Ver Guía Completa</a>
-    </div>
+    </nav>
 
-    <div id="financiamiento" class="tabcontent">
-        <h2>💰 Financiamiento</h2>
-        <p>Enlaces a programas de crédito y apoyo económico:</p>
-        <ul>
-            <li><strong>Banca Pública:</strong> Banco de Venezuela - EmprendeBDV</li>
-            <li><strong>Banca Privada:</strong> Programas Pymes de bancos comerciales</li>
-            <li><strong>Fondos Gubernamentales:</strong> Fondos BANDES, FONDONORME</li>
-        </ul>
-        <a href="#" class="cta-button">💳 Ver Opciones de Crédito</a>
-    </div>
-        <div id="capacitacion" class="tabcontent">
-        <h2>🎓 Capacitación</h2>
-        <p>Aprende las habilidades que necesitas para triunfar:</p>
-        <ul>
-            <li><strong>YouTube:</strong> Próximamente - Nuestro canal con tutoriales</li>
-            <li><strong>Cursos Gratuitos:</strong> INCES, Fundación Empresas Polar</li>
-            <li><strong>Guías Prácticas:</strong> Marketing Digital, Finanzas Básicas</li>
-        </ul>
-        <a href="#" class="cta-button">🎥 Ir al Canal de YouTube</a>
-    </div>
-
-    <div id="casos" class="tabcontent">
-        <h2>💡 Casos de Éxito</h2>
-        <p>Inspírate con estos ejemplos reales:</p>
-        <ul>
-            <li><strong>Emprendimiento Gastronómico:</strong> De cocina casera a negocio establecido</li>
-            <li><strong>Tienda Digital:</strong> Cómo vender productos artesanales online</li>
-            <li><strong>Servicios con IA:</strong> Usando inteligencia artificial para crecer</li>
-        </ul>
-        <a href="#" class="cta-button">🌟 Ver Casos Completos</a>
-    </div>
-
-    <footer>
-        <p>¿Necesitas ayuda específica? Escríbenos</p>
-        <p>© 2024 Hub del Emprendedor Venezolano - emprende-venezuela</p>
-    </footer>
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <h1>Convierte tu idea en un negocio exitoso</h1>
+        <p>Accede a formación, créditos, mentorías y todos los recursos necesarios para emprender en Venezuela</p>
+        <a href="#formacion" class="cta-button">Comenzar Ahora</a>
+    </section>
 
     <script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].classList.remove("active");
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-            }
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-        }
+        // Control del menú hamburguesa
+        const menuBtn = document.getElementById('menuBtn');
+        const menuLateral = document.getElementById('menuLateral');
+        const cerrarMenu = document.getElementById('cerrarMenu');
+        const overlay = document.getElementById('overlay');
+
+        menuBtn.addEventListener('click', () => {
+            menuLateral.classList.add('activo');
+            overlay.classList.add('activo');
+        });
+
+        cerrarMenu.addEventListener('click', () => {
+            menuLateral.classList.remove('activo');
+            overlay.classList.remove('activo');
+        });
+
+        overlay.addEventListener('click', () => {
+            menuLateral.classList.remove('activo');
+            overlay.classList.remove('activo');
+        });
     </script>
+<!-- Sección Formación con Logos -->
+<section class="seccion-formacion" id="formacion" style="padding: 4rem 2rem; background: var(--white);">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; color: var(--primary); font-size: 2.5rem; margin-bottom: 3rem; font-weight: 800;">
+            Aliados en tu Formación
+        </h2>
+        
+        <div class="logo-grid">
+            <!-- INCES -->
+            <a href="https://www.inces.gob.ve" class="logo-item">
+                <div class="logo-placeholder">INCES</div>
+                <strong style="color: var(--dark);">INCES</strong>
+                <p style="color: var(--text); font-size: 0.8rem; margin-top: 0.5rem;">Formación técnica gratuita</p>
+            </a>
+
+            <!-- Fundación Polar -->
+            <a href="https://www.fundacionempresaspolar.org" class="logo-item">
+                <div class="logo-placeholder">FP</div>
+                <strong style="color: var(--dark);">Fundación Polar</strong>
+                <p style="color: var(--text); font-size: 0.8rem; margin-top: 0.5rem;">Desarrollo empresarial</p>
+            </a>
+
+            <!-- IESA -->
+            <a href="https://www.iesa.edu.ve" class="logo-item">
+                <div class="logo-placeholder">IESA</div>
+                <strong style="color: var(--dark);">IESA</strong>
+                <p style="color: var(--text); font-size: 0.8rem; margin-top: 0.5rem;">Educación ejecutiva</p>
+            </a>
+
+            <!-- SENIAT -->
+            <a href="https://www.seniat.gob.ve" class="logo-item">
+                <div class="logo-placeholder">SENIAT</div>
+                <strong style="color: var(--dark);">SENIAT</strong>
+                <p style="color: var(--text); font-size: 0.8rem; margin-top: 0.5rem;">Formación tributaria</p>
+            </a>
+
+            <!-- Cámara de Comercio -->
+            <a href="#" class="logo-item">
+                <div class="logo-placeholder">CC</div>
+                <strong style="color: var(--dark);">Cámara de Comercio</strong>
+                <p style="color: var(--text); font-size: 0.8rem; margin-top: 0.5rem;">Redes empresariales</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Carrusel de Videos Funcional -->
+<section class="carrusel-section" style="padding: 4rem 2rem; background: var(--light);">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; color: var(--primary); font-size: 2.5rem; margin-bottom: 3rem; font-weight: 800;">
+            Aprende con Nuestros Tutoriales
+        </h2>
+        
+        <div class="carrusel-container">
+            <div class="carrusel-track">
+                <div class="video-item">
+                    <iframe width="100%" height="400" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>
+                    <h3 style="text-align: center; margin-top: 1rem; color: var(--dark);">Cómo Registrar tu Empresa</h3>
+                </div>
+                <div class="video-item">
+                    <iframe width="100%" height="400" src="https://www.youtube.com/embed/EXAMPLE2" 
+                            frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>
+                    <h3 style="text-align: center; margin-top: 1rem; color: var(--dark);">Plan de Negocios Básico</h3>
+                </div>
+                <div class="video-item">
+                    <iframe width="100%" height="400" src="https://www.youtube.com/embed/EXAMPLE3" 
+                            frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>
+                    <h3 style="text-align: center; margin-top: 1rem; color: var(--dark);">Finanzas para Emprendedores</h3>
+                </div>
+            </div>
+            
+            <button class="carrusel-btn prev" onclick="moveSlide(-1)">‹</button>
+            <button class="carrusel-btn next" onclick="moveSlide(1)">›</button>
+        </div>
+    </div>
+</section>
+
+<!-- Sección Bancos con Logos -->
+<section class="bancos-section" id="creditos" style="padding: 4rem 2rem; background: var(--white);">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; color: var(--primary); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800;">
+            Acceso a Crédito
+        </h2>
+        <p style="text-align: center; color: var(--text); font-size: 1.2rem; margin-bottom: 3rem;">
+            Conectamos tu emprendimiento con las mejores opciones de financiamiento
+        </p>
+
+        <!-- Banca Estatal -->
+        <div style="margin-bottom: 4rem;">
+            <h3 style="color: var(--secondary); margin-bottom: 2rem; text-align: center; font-size: 1.5rem;">Banca Pública</h3>
+            <div class="logo-grid">
+                <a href="https://www.bancodevenezuela.com" class="logo-item">
+                    <div class="logo-placeholder">BDV</div>
+                    <strong style="color: var(--dark);">Banco de Venezuela</strong>
+                    <p style="color: var(--text); font-size: 0.8rem; margin-top: 0.5rem;">Microempresas</p>
+                </a>
+
+                <a href="https://www.bancobicentenario.gob.ve" class="logo-item">
+                    <div class="logo-placeholder">BB</div>
+                    <strong style="color: var(--dark);">Bicentenario</strong>
+                    <p style="color: var(--text); font-size: 0.8rem; margin-top: 0.5rem;">Crédito Joven</p>
+                </a>
+
+                <a href="https://www.bfc.com.ve" class="logo-item">
+                    <div class="logo-placeholder">BFC</div>
+                    <strong style="color: var(--dark);">Fondo Común</strong>
+                    <p style="color: var(--text); font-size: 0.8rem; margin-top: 0.5rem;">Proyectos productivos</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Banca Privada -->
+        <div>
+            <h3 style="color: var(--accent); margin-bottom: 2rem; text-align: center; font-size: 1.5rem;">Banca Privada</h3>
+            <div class="logo-grid">
+                <a href="https://www.banesco.com" class="logo-item">
+                    <div class="logo-placeholder">BSC</div>
+                    <strong style="color: var(--dark);">Banesco</strong>
+                    <p style="color: var(--text); font-size: 0.8rem; margin-top: 0.5rem;">Créditos PYME</p>
+                </a>
+
+                <a href="https://www.mercantilbanco.com" class="logo-item">
+                    <div class="logo-placeholder">MRC</div>
+                    <strong style="color: var(--dark);">Mercantil</strong>
+                    <p style="color: var(--text); font-size: 0.8rem; margin-top: 0.5rem;">Capital de trabajo</p>
+                </a>
+
+                <a href="https://www.provincial.com" class="logo-item">
+                    <div class="logo-placeholder">PVL</div>
+                    <strong style="color: var(--dark);">Provincial</strong>
+                    <p style="color: var(--text); font-size: 0.8rem; margin-top: 0.5rem;">Soluciones integrales</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sección Trámites y Registros -->
+<section class="tramites" id="tramites" style="padding: 4rem 2rem; background: var(--light);">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; color: var(--primary); font-size: 2.5rem; margin-bottom: 3rem; font-weight: 800;">
+            Trámites y Registros Obligatorios
+        </h2>
+        
+        <div class="pasos-tramites" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+            
+            <div class="paso-card" style="background: var(--white); padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="background: var(--secondary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-weight: bold;">1</div>
+                <h3 style="color: var(--dark); margin-bottom: 1rem;">Registro SUNACOP</h3>
+                <p style="color: var(--text); margin-bottom: 1.5rem;">Registro único de contribuyentes</p>
+                <a href="https://www.sunacop.gob.ve" style="color: var(--accent); text-decoration: none; font-weight: 600;">Descargar Formulario →</a>
+            </div>
+
+            <div class="paso-card" style="background: var(--white); padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="background: var(--accent); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-weight: bold;">2</div>
+                <h3 style="color: var(--dark); margin-bottom: 1rem;">Registro RNCE</h3>
+                <p style="color: var(--text); margin-bottom: 1.5rem;">Registro nacional de contratistas</p>
+                <a href="https://www.rnce.gob.ve" style="color: var(--accent); text-decoration: none; font-weight: 600;">Acceder al Portal →</a>
+            </div>
+
+            <div class="paso-card" style="background: var(--white); padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="background: var(--primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-weight: bold;">3</div>
+                <h3 style="color: var(--dark); margin-bottom: 1rem;">Registro Mercantil</h3>
+                <p style="color: var(--text); margin-bottom: 1.5rem;">Inscripción de tu empresa</p>
+                <a href="https://www.registromercantil.gob.ve" style="color: var(--accent); text-decoration: none; font-weight: 600;">Iniciar Trámite →</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Sección Exportación -->
+<section class="exportacion" id="exportacion" style="padding: 4rem 2rem; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white;">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800;">
+            Emprender para Exportar
+        </h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Conecta tu negocio con mercados internacionales
+        </p>
+        
+        <div class="pasos-exportacion" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            
+            <div class="paso-card" style="text-align: center;">
+                <div style="background: rgba(255,255,255,0.2); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 2rem;">📋</div>
+                <h3 style="margin-bottom: 1rem;">Registro de Exportador</h3>
+                <p style="font-size: 0.9rem; opacity: 0.9;">Inscríbete en el REA para comenzar a exportar</p>
+            </div>
+
+            <div class="paso-card" style="text-align: center;">
+                <div style="background: rgba(255,255,255,0.2); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 2rem;">🌍</div>
+                <h3 style="margin-bottom: 1rem;">Mercados Internacionales</h3>
+                <p style="font-size: 0.9rem; opacity: 0.9;">Conoce los tratados y acuerdos comerciales</p>
+            </div>
+
+            <div class="paso-card" style="text-align: center;">
+                <div style="background: rgba(255,255,255,0.2); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 2rem;">📦</div>
+                <h3 style="margin-bottom: 1rem;">Logística y Envíos</h3>
+                <p style="font-size: 0.9rem; opacity: 0.9;">Agencias y servicios de exportación</p>
+            </div>
+
+            <div class="paso-card" style="text-align: center;">
+                <div style="background: rgba(255,255,255,0.2); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 2rem;">💼</div>
+                <h3 style="margin-bottom: 1rem;">Asesoría Especializada</h3>
+                <p style="font-size: 0.9rem; opacity: 0.9;">Consultores en comercio exterior</p>
+            </div>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="#formularios" style="background: var(--secondary); color: white; padding: 1rem 2rem; border-radius: 5px; text-decoration: none; font-weight: 600; display: inline-block;">
+                Iniciar Proceso de Exportación
+            </a>
+        </div>
+    </div>
+</section>
+<!-- Sección Chatbot y Asistencia -->
+<section class="chatbot-section" id="chatbot" style="padding: 4rem 2rem; background: var(--white);">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; color: var(--primary); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800;">
+            Asistencia Personalizada 24/7
+        </h2>
+        <p style="text-align: center; color: var(--text); font-size: 1.2rem; margin-bottom: 3rem;">
+            Nuestro chatbot en Telegram está listo para guiarte en cada paso de tu emprendimiento
+        </p>
+
+        <div class="chatbot-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center;">
+            
+            <!-- Información del Chatbot -->
+            <div class="chatbot-info">
+                <h3 style="color: var(--accent); margin-bottom: 1.5rem;">Chatbot Emprende Venezuela</h3>
+                <ul style="color: var(--text); list-style: none; padding: 0;">
+                    <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                        <span style="background: var(--accent); color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0;">✓</span>
+                        <span>Resuelve dudas sobre trámites y registros</span>
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                        <span style="background: var(--accent); color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0;">✓</span>
+                        <span>Guía para acceder a créditos y financiamiento</span>
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                        <span style="background: var(--accent); color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0;">✓</span>
+                        <span>Información sobre cursos y formación</span>
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                        <span style="background: var(--accent); color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0;">✓</span>
+                        <span>Asesoría en exportación y mercados internacionales</span>
+                    </li>
+                </ul>
+                
+                <div style="margin-top: 2rem;">
+                    <a href="https://t.me/EmprendeVenezuelaBot" style="background: var(--accent); color: white; padding: 1rem 2rem; border-radius: 5px; text-decoration: none; font-weight: 600; display: inline-block; margin-right: 1rem;">
+                        <i class="fab fa-telegram"></i> Abrir en Telegram
+                    </a>
+                    <button onclick="mostrarQR()" style="background: transparent; border: 2px solid var(--accent); color: var(--accent); padding: 1rem 2rem; border-radius: 5px; cursor: pointer; font-weight: 600;">
+                        Ver Código QR
+                    </button>
+                </div>
+            </div>
+
+            <!-- Imagen del Chatbot -->
+            <div class="chatbot-image" style="text-align: center;">
+                <div style="background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); border-radius: 20px; padding: 2rem; color: white; display: inline-block;">
+                    <i class="fab fa-telegram" style="font-size: 8rem; opacity: 0.9;"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Sección Formularios Interactivos -->
+<section class="formularios-section" id="formularios" style="padding: 4rem 2rem; background: var(--light);">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; color: var(--primary); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800;">
+            Formularios Interactivos
+        </h2>
+        <p style="text-align: center; color: var(--text); font-size: 1.2rem; margin-bottom: 3rem;">
+            Completa estos formularios y recibe orientación personalizada
+        </p>
+
+        <div class="formularios-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+            
+            <!-- Formulario 1: Evaluación de Proyecto -->
+            <div class="formulario-card" style="background: var(--white); padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <h3 style="color: var(--dark); margin-bottom: 1.5rem; text-align: center;">Evaluación de Tu Proyecto</h3>
+                <form id="evaluacionForm">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; color: var(--text); margin-bottom: 0.5rem;">Nombre completo</label>
+                        <input type="text" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; color: var(--text); margin-bottom: 0.5rem;">Correo electrónico</label>
+                        <input type="email" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; color: var(--text); margin-bottom: 0.5rem;">¿En qué etapa está tu emprendimiento?</label>
+                        <select required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;">
+                            <option value="">Selecciona una opción</option>
+                            <option value="idea">Tengo una idea</option>
+                            <option value="desarrollo">En desarrollo</option>
+                            <option value="operando">Operando</option>
+                            <option value="expansion">En expansión</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; color: var(--text); margin-bottom: 0.5rem;">Describe brevemente tu proyecto</label>
+                        <textarea rows="4" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                    </div>
+                    <button type="submit" style="background: var(--accent); color: white; border: none; padding: 1rem 2rem; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
+                        Enviar Evaluación
+                    </button>
+                </form>
+            </div>
+
+            <!-- Formulario 2: Solicitud de Asesoría -->
+            <div class="formulario-card" style="background: var(--white); padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <h3 style="color: var(--dark); margin-bottom: 1.5rem; text-align: center;">Solicitud de Asesoría</h3>
+                <form id="asesoriaForm">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; color: var(--text); margin-bottom: 0.5rem;">Área de interés</label>
+                        <select required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;">
+                            <option value="">Selecciona un área</option>
+                            <option value="legal">Aspectos legales y trámites</option>
+                            <option value="financiero">Financiamiento y créditos</option>
+                            <option value="exportacion">Exportación y mercados internacionales</option>
+                            <option value="marketing">Marketing y ventas</option>
+                            <option value="tecnologia">Tecnología y digitalización</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; color: var(--text); margin-bottom: 0.5rem;">Nivel de urgencia</label>
+                        <select required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;">
+                            <option value="">Selecciona una opción</option>
+                            <option value="baja">Baja (planificación)</option>
+                            <option value="media">Media (en proceso)</option>
+                            <option value="alta">Alta (inmediato)</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; color: var(--text); margin-bottom: 0.5rem;">Presupuesto disponible</label>
+                        <select required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;">
+                            <option value="">Selecciona un rango</option>
+                            <option value="0-500">0 - 500 USD</option>
+                            <option value="500-2000">500 - 2,000 USD</option>
+                            <option value="2000-5000">2,000 - 5,000 USD</option>
+                            <option value="5000+">Más de 5,000 USD</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; color: var(--text); margin-bottom: 0.5rem;">¿Qué desafío específico enfrentas?</label>
+                        <textarea rows="4" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                    </div>
+                    <button type="submit" style="background: var(--secondary); color: white; border: none; padding: 1rem 2rem; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
+                        Solicitar Asesoría
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Formularios PDF Adicionales -->
+        <div class="formularios-pdf" style="margin-top: 4rem;">
+            <h3 style="color: var(--primary); margin-bottom: 2rem; text-align: center;">Formularios Oficiales para Descargar</h3>
+            <div class="pdf-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                
+                <a href="#" style="background: var(--white); padding: 1.5rem; border-radius: 8px; text-decoration: none; color: var(--text); display: block; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📄</div>
+                    <strong>Formulario SUNACOP</strong>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem;">Registro único de contribuyentes</div>
+                </a>
+
+                <a href="#" style="background: var(--white); padding: 1.5rem; border-radius: 8px; text-decoration: none; color: var(--text); display: block; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📄</div>
+                    <strong>Formulario RNCE</strong>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem;">Registro nacional de contratistas</div>
+                </a>
+
+                <a href="#" style="background: var(--white); padding: 1.5rem; border-radius: 8px; text-decoration: none; color: var(--text); display: block; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📄</div>
+                    <strong>Solicitud de Crédito</strong>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem;">Modelo para instituciones bancarias</div>
+                </a>
+
+                <a href="#" style="background: var(--white); padding: 1.5rem; border-radius: 8px; text-decoration: none; color: var(--text); display: block; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📄</div>
+                    <strong>Plan de Negocios</strong>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem;">Plantilla editable en Word</div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Funcionalidad para el chatbot
+    function mostrarQR() {
+        alert('Escanea este código QR con Telegram para acceder a nuestro chatbot:\n\n[En una versión futura, aquí aparecería el código QR]');
+        // En una implementación real, aquí mostraríamos una imagen del QR
+    }
+
+    // Manejo de envío de formularios
+    document.getElementById('evaluacionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('¡Gracias por tu evaluación! Te contactaremos dentro de 24 horas para darte feedback personalizado.');
+        this.reset();
+    });
+
+    document.getElementById('asesoriaForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('¡Solicitud de asesoría enviada! Un especialista se comunicará contigo en las próximas 12 horas.');
+        this.reset();
+    });
+
+    // Efectos visuales para los formularios
+    document.querySelectorAll('.formulario-card form input, .formulario-card form select, .formulario-card form textarea').forEach(element => {
+        element.addEventListener('focus', function() {
+            this.style.borderColor = 'var(--accent)';
+            this.style.boxShadow = '0 0 0 2px rgba(41, 128, 185, 0.2)';
+        });
+        element.addEventListener('blur', function() {
+            this.style.borderColor = '#ddd';
+            this.style.boxShadow = 'none';
+        });
+    });
+</script>
+<!-- Sección Casos de Éxito -->
+<section class="casos-exito" id="exitos" style="padding: 4rem 2rem; background: var(--white);">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; color: var(--primary); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800;">
+            Emprendedores que Inspiran
+        </h2>
+        <p style="text-align: center; color: var(--text); font-size: 1.2rem; margin-bottom: 3rem;">
+            Conoce historias reales de venezolanos que lograron hacer crecer sus negocios
+        </p>
+
+        <div class="casos-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+            
+            <!-- Caso 1 -->
+            <div class="caso-card" style="background: var(--light); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <div style="height: 200px; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+                    🍞
+                </div>
+                <div style="padding: 2rem;">
+                    <h3 style="color: var(--dark); margin-bottom: 1rem;">Panadería "El Trigal"</h3>
+                    <p style="color: var(--text); margin-bottom: 1.5rem; font-style: italic;">
+                        "Con el crédito del Banco de Venezuela pase de vender en mi casa a tener 3 locales"
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--accent); font-weight: 600;">María González</span>
+                        <span style="background: var(--secondary); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">Alimentos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caso 2 -->
+            <div class="caso-card" style="background: var(--light); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <div style="height: 200px; background: linear-gradient(135deg, #27AE60 0%, #2ECC71 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+                    💻
+                </div>
+                <div style="padding: 2rem;">
+                    <h3 style="color: var(--dark); margin-bottom: 1rem;">TechSolutions VE</h3>
+                    <p style="color: var(--text); margin-bottom: 1.5rem; font-style: italic;">
+                        "La formación del INCES me dio las herramientas para exportar servicios digitales"
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--accent); font-weight: 600;">Carlos Rodríguez</span>
+                        <span style="background: #27AE60; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">Tecnología</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caso 3 -->
+            <div class="caso-card" style="background: var(--light); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <div style="height: 200px; background: linear-gradient(135deg, #E74C3C 0%, #E67E22 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+                    🧵
+                </div>
+                <div style="padding: 2rem;">
+                    <h3 style="color: var(--dark); margin-bottom: 1rem;">Moda Artesanal VE</h3>
+                    <p style="color: var(--text); margin-bottom: 1.5rem; font-style: italic;">
+                        "Gracias a los programas de exportación ahora vendemos a 5 países diferentes"
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--accent); font-weight: 600;">Ana Mendoza</span>
+                        <span style="background: #E67E22; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">Moda</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Botón para más casos -->
+        <div style="text-align: center; margin-top: 3rem;">
+            <button onclick="mostrarMasCasos()" style="background: transparent; border: 2px solid var(--accent); color: var(--accent); padding: 1rem 2rem; border-radius: 5px; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                Ver Más Casos de Éxito
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Sección Recursos Descargables -->
+<section class="recursos" id="recursos" style="padding: 4rem 2rem; background: var(--light);">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; color: var(--primary); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800;">
+            Recursos Gratuitos
+        </h2>
+        <p style="text-align: center; color: var(--text); font-size: 1.2rem; margin-bottom: 3rem;">
+            Descarga todo lo que necesitas para impulsar tu emprendimiento
+        </p>
+
+        <div class="recursos-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+            
+            <div class="recurso-card" style="background: var(--white); padding: 2rem; border-radius: 10px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                <h3 style="color: var(--dark); margin-bottom: 1rem;">Plantilla Plan de Negocios</h3>
+                <p style="color: var(--text); margin-bottom: 1.5rem;">Estructura profesional editable en Word y PDF</p>
+                <button onclick="descargarRecurso('plan-negocios')" style="background: var(--accent); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
+                    Descargar Gratis
+                </button>
+            </div>
+
+            <div class="recurso-card" style="background: var(--white); padding: 2rem; border-radius: 10px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
+                <h3 style="color: var(--dark); margin-bottom: 1rem;">Calculadora Financiera</h3>
+                <p style="color: var(--text); margin-bottom: 1.5rem;">Excel con fórmulas para proyecciones y flujos</p>
+                <button onclick="descargarRecurso('calculadora')" style="background: var(--accent); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
+                    Descargar Gratis
+                </button>
+            </div>
+
+            <div class="recurso-card" style="background: var(--white); padding: 2rem; border-radius: 10px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>
+                <h3 style="color: var(--dark); margin-bottom: 1rem;">Guía de Trámites 2024</h3>
+                <p style="color: var(--text); margin-bottom: 1.5rem;">Checklist completo con costos y tiempos</p>
+                <button onclick="descargarRecurso('guia-tramites')" style="background: var(--accent); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
+                    Descargar Gratis
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Recursos Adicionales -->
+        <div class="recursos-adicionales" style="margin-top: 4rem;">
+            <h3 style="color: var(--primary); margin-bottom: 2rem; text-align: center;">Más Recursos Especializados</h3>
+            <div class="recursos-lista" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                
+                <a href="#" style="background: var(--white); padding: 1.5rem; border-radius: 8px; text-decoration: none; color: var(--text); display: block; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
+                    <strong>Contratos Modelo</strong>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem;">Para diferentes tipos de negocio</div>
+                </a>
+
+                <a href="#" style="background: var(--white); padding: 1.5rem; border-radius: 8px; text-decoration: none; color: var(--text); display: block; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                    <strong>Estudio de Mercado</strong>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem;">Plantillas y metodologías</div>
+                </a>
+
+                <a href="#" style="background: var(--white); padding: 1.5rem; border-radius: 8px; text-decoration: none; color: var(--text); display: block; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📱</div>
+                    <strong>Marketing Digital</strong>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem;">Guías para redes sociales</div>
+                </a>
+
+                <a href="#" style="background: var(--white); padding: 1.5rem; border-radius: 8px; text-decoration: none; color: var(--text); display: block; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+                    <strong>Indicadores Clave</strong>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem;">KPIs para tu negocio</div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Funciones para la sección de casos de éxito
+    function mostrarMasCasos() {
+        alert('¡Pronto agregaremos más historias inspiradoras de emprendedores venezolanos! Sigue visitándonos para nuevas actualizaciones.');
+    }
+
+    // Funciones para la descarga de recursos
+    function descargarRecurso(tipo) {
+        const recursos = {
+            'plan-negocios': 'Plantilla_Plan_Negocios_Emprende_Venezuela.pdf',
+            'calculadora': 'Calculadora_Financiera_Emprendedores.xlsx',
+            'guia-tramites': 'Guia_Completa_Tramites_2024.pdf'
+        };
+        
+        const nombreArchivo = recursos[tipo];
+        alert(`¡Gracias por tu interés! Pronto podrás descargar: ${nombreArchivo}\n\nEstamos preparando los mejores recursos para ti.`);
+        
+        // En una versión futura, aquí iría la descarga real
+        // window.location.href = `/descargas/${nombreArchivo}`;
+    }
+
+    // Efectos hover para tarjetas de recursos
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.recurso-card, .caso-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    });
+</script>
+<!-- Sección Adsense Optimizada -->
+<section class="adsense-optimizado" style="padding: 2rem; background: var(--white);">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <div class="adsense-container" style="background: #f8f9fa; border: 2px dashed #ccc; padding: 2rem; text-align: center; border-radius: 10px;">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Publicidad</h3>
+            <p style="color: var(--text); margin-bottom: 1rem;">Espacio optimizado para Google AdSense</p>
+            <div style="background: #e9ecef; padding: 1rem; border-radius: 5px; min-height: 100px; display: flex; align-items: center; justify-content: center;">
+                <!-- Aquí irá tu código de AdSense -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXXXXXXXXXXX"
+                     data-ad-slot="XXXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Completo -->
+<footer class="footer-completo" id="contacto" style="background: var(--primary); color: white; padding: 3rem 2rem 1rem;">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        
+        <!-- Sección principal del footer -->
+        <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+            
+            <!-- Columna 1: Información -->
+            <div class="footer-col">
+                <h3 style="color: white; margin-bottom: 1rem; font-size: 1.5rem;">Emprende Venezuela</h3>
+                <p style="color: #bdc3c7; margin-bottom: 1rem;">
+                    Plataforma integral para emprendedores venezolanos. Formación, créditos, recursos y acompañamiento para hacer crecer tu negocio.
+                </p>
+                <div class="contacto-info" style="color: #bdc3c7;">
+                    <p>📧 info@emprendevenezuela.org</p>
+                    <p>📞 +58 424-123-4567</p>
+                    <p>📍 Caracas, Venezuela</p>
+                </div>
+            </div>
+
+            <!-- Columna 2: Enlaces rápidos -->
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 1rem;">Enlaces Rápidos</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;"><a href="#formacion" style="color: #bdc3c7; text-decoration: none;">Formación</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#creditos" style="color: #bdc3c7; text-decoration: none;">Créditos</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#tramites" style="color: #bdc3c7; text-decoration: none;">Trámites</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#exportacion" style="color: #bdc3c7; text-decoration: none;">Exportación</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#exitos" style="color: #bdc3c7; text-decoration: none;">Casos de Éxito</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Recursos -->
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 1rem;">Recursos</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;"><a href="#recursos" style="color: #bdc3c7; text-decoration: none;">Descargables</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#formularios" style="color: #bdc3c7; text-decoration: none;">Formularios</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#chatbot" style="color: #bdc3c7; text-decoration: none;">Chatbot</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #bdc3c7; text-decoration: none;">Preguntas Frecuentes</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #bdc3c7; text-decoration: none;">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Newsletter -->
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 1rem;">Newsletter</h4>
+                <p style="color: #bdc3c7; margin-bottom: 1rem;">
+                    Suscríbete para recibir oportunidades de financiamiento y formación.
+                </p>
+                <form style="display: flex; gap: 0.5rem;">
+                    <input type="email" placeholder="Tu correo" style="padding: 0.75rem; border: none; border-radius: 5px; flex: 1; min-width: 0;">
+                    <button type="submit" style="background: var(--secondary); color: white; border: none; padding: 0.75rem 1rem; border-radius: 5px; cursor: pointer; font-weight: 600;">
+                        OK
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Línea separadora -->
+        <hr style="border: none; border-top: 1px solid #34495e; margin: 2rem 0;">
+
+        <!-- Sección inferior del footer -->
+        <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            
+            <!-- Derechos de autor -->
+            <div class="copyright">
+                <p style="color: #bdc3c7; margin: 0;">
+                    &copy; 2024 Emprende Venezuela. Todos los derechos reservados.
+                </p>
+            </div>
+
+            <!-- Redes sociales -->
+            <div class="redes-sociales" style="display: flex; gap: 1rem;">
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s;">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s;">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s;">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s;">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s;">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s;">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+
+            <!-- Enlaces legales -->
+            <div class="legal-links" style="display: flex; gap: 1rem;">
+                <a href="#" style="color: #bdc3c7; text-decoration: none; font-size: 0.9rem;">Términos</a>
+                <a href="#" style="color: #bdc3c7; text-decoration: none; font-size: 0.9rem;">Privacidad</a>
+                <a href="#" style="color: #bdc3c7; text-decoration: none; font-size: 0.9rem;">Cookies</a>
+            </div>
+
+        </div>
+
+    </div>
+</footer>
+
+<!-- Scripts adicionales para optimización -->
+<script>
+    // Smooth scroll para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Animación al hacer scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Aplicar animación a las secciones
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    });
+
+    // Contador de visitas (simulado)
+    let visitas = localStorage.getItem('visitas_emprende_venezuela') || 0;
+    visitas = parseInt(visitas) + 1;
+    localStorage.setItem('visitas_emprende_venezuela', visitas);
+    
+    console.log(`¡Bienvenido a Emprende Venezuela! Eres el visitante número ${visitas}`);
+</script>
+
+<!-- Estilos adicionales para mejoras visuales -->
+<style>
+    /* Mejoras de rendimiento y animaciones */
+    .caso-card:hover, .recurso-card:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
+    }
+    
+    /* Mejoras de accesibilidad */
+    @media (max-width: 768px) {
+        .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+        }
+        
+        .seccion-formacion, .creditos, .exportacion {
+            padding: 2rem 1rem;
+        }
+    }
+    
+    /* Efectos de carga mejorados */
+    .loading {
+        animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.7; }
+        100% { opacity: 1; }
+    }
+</style>
+<!-- === COMIENZA A COPIAR DESDE AQUÍ === -->
+<style>
+    /* Mejoras al menú lateral - más compacto */
+    .menu-lateral {
+        width: 250px !important;
+        padding: 1rem !important;
+    }
+
+    .nav-links {
+        margin-top: 1rem !important;
+    }
+
+    .nav-links li {
+        margin: 0.8rem 0 !important;
+    }
+
+    /* Botón flotante del asistente */
+    .asistente-flotante {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: transform 0.3s;
+        border: none;
+    }
+
+    .asistente-flotante:hover {
+        transform: scale(1.1);
+    }
+
+    /* Carrusel funcional */
+    .carrusel-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    .carrusel-track {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+
+    .video-item {
+        min-width: 100%;
+        padding: 1rem;
+    }
+
+    .carrusel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.9);
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.2rem;
+        z-index: 10;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .prev { left: 1rem; }
+    .next { right: 1rem; }
+
+    /* Estilos para logos de instituciones */
+    .logo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1.5rem;
+        justify-items: center;
+    }
+
+    .logo-item {
+        background: var(--white);
+        padding: 1.5rem;
+        border-radius: 10px;
+        text-align: center;
+        transition: transform 0.3s;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        text-decoration: none;
+        color: var(--text);
+    }
+
+    .logo-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .logo-placeholder {
+        width: 80px;
+        height: 80px;
+        background: var(--light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        font-weight: bold;
+        color: var(--primary);
+    }
+
+    /* AdSense como cintillo fijo */
+    .adsense-fijo {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #f8f9fa;
+        padding: 1rem;
+        text-align: center;
+        border-top: 2px dashed #ccc;
+        z-index: 999;
+    }
+
+    .main-content {
+        margin-bottom: 80px; /* Espacio para el adsense fijo */
+    }
+</style>
+
+<!-- Botón flotante del asistente -->
+<button class="asistente-flotante" onclick="abrirAsistente()">
+    <i class="fas fa-robot"></i>
+</button>
+
+<!-- AdSense fijo en pie -->
+<div class="adsense-fijo">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <p style="margin: 0; color: var(--text); font-size: 0.9rem;">Espacio para publicidad - Google AdSense</p>
+        <!-- Aquí irá tu código de AdSense -->
+    </div>
+</div>
+
+<script>
+    // Carrusel de videos funcional
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.video-item');
+    const totalSlides = slides.length;
+
+    function moveSlide(direction) {
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+
+    function updateCarousel() {
+        const track = document.querySelector('.carrusel-track');
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    // Auto-avance del carrusel
+    setInterval(() => {
+        moveSlide(1);
+    }, 5000);
+
+    // Asistente virtual
+    function abrirAsistente() {
+        const mensaje = "¡Hola! Soy tu asistente virtual de Emprende Venezuela. ¿En qué puedo ayudarte?\n\nPuedo orientarte sobre:\n• Trámites y registros\n• Opciones de crédito\n• Formación disponible\n• Proceso de exportación\n\nEscribe tu pregunta:";
+        const pregunta = prompt(mensaje);
+        
+        if (pregunta) {
+            // Aquí integraríamos con una IA en el futuro
+            alert("Gracias por tu pregunta. Nuestro sistema está procesando tu consulta y te responderá pronto. Mientras tanto, puedes explorar nuestras secciones de formación y recursos.");
+        }
+    }
+
+    // Smooth scroll mejorado
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Cerrar menú si está abierto
+                document.getElementById('menuLateral').classList.remove('activo');
+                document.getElementById('overlay').classList.remove('activo');
+            }
+        });
+    });
+</script>
+<!-- Footer Mejorado con Redes Sociales -->
+<footer class="footer-completo" id="contacto" style="background: var(--primary); color: white; padding: 3rem 2rem 1rem;">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        
+        <!-- Sección principal del footer -->
+        <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+            
+            <!-- Columna 1: Información -->
+            <div class="footer-col">
+                <h3 style="color: white; margin-bottom: 1rem; font-size: 1.5rem;">Emprende Venezuela</h3>
+                <p style="color: #bdc3c7; margin-bottom: 1rem;">
+                    Plataforma integral para emprendedores venezolanos. Formación, créditos, recursos y acompañamiento.
+                </p>
+                <div class="contacto-info" style="color: #bdc3c7;">
+                    <p>📧 info@emprendevenezuela.org</p>
+                    <p>📞 +58 424-123-4567</p>
+                    <p>📍 Venezuela</p>
+                </div>
+            </div>
+
+            <!-- Columna 2: Enlaces rápidos -->
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 1rem;">Enlaces Rápidos</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;"><a href="#formacion" style="color: #bdc3c7; text-decoration: none;">Formación</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#creditos" style="color: #bdc3c7; text-decoration: none;">Créditos</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#tramites" style="color: #bdc3c7; text-decoration: none;">Trámites</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#exportacion" style="color: #bdc3c7; text-decoration: none;">Exportación</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Recursos -->
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 1rem;">Recursos</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;"><a href="#recursos" style="color: #bdc3c7; text-decoration: none;">Descargables</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#formularios" style="color: #bdc3c7; text-decoration: none;">Formularios</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#chatbot" style="color: #bdc3c7; text-decoration: none;">Asistente Virtual</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#exitos" style="color: #bdc3c7; text-decoration: none;">Casos de Éxito</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Redes Sociales Mejoradas -->
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 1rem;">Síguenos en Redes</h4>
+                <div class="redes-footer" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1.5rem;">
+                    <a href="#" style="background: #3b5998; color: white; padding: 0.75rem; border-radius: 8px; text-decoration: none; text-align: center; display: block;">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" style="background: #1da1f2; color: white; padding: 0.75rem; border-radius: 8px; text-decoration: none; text-align: center; display: block;">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" style="background: #e4405f; color: white; padding: 0.75rem; border-radius: 8px; text-decoration: none; text-align: center; display: block;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" style="background: #ff0000; color: white; padding: 0.75rem; border-radius: 8px; text-decoration: none; text-align: center; display: block;">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" style="background: #0077b5; color: white; padding: 0.75rem; border-radius: 8px; text-decoration: none; text-align: center; display: block;">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" style="background: #0088cc; color: white; padding: 0.75rem; border-radius: 8px; text-decoration: none; text-align: center; display: block;">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                </div>
+                
+                <!-- Newsletter -->
+                <div class="newsletter">
+                    <p style="color: #bdc3c7; margin-bottom: 1rem; font-size: 0.9rem;">
+                        Recibe oportunidades de financiamiento
+                    </p>
+                    <form style="display: flex; gap: 0.5rem;">
+                        <input type="email" placeholder="Tu correo" style="padding: 0.5rem; border: none; border-radius: 5px; flex: 1; min-width: 0; font-size: 0.9rem;">
+                        <button type="submit" style="background: var(--secondary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; font-weight: 600;">
+                            OK
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Línea separadora -->
+        <hr style="border: none; border-top: 1px solid #34495e; margin: 2rem 0;">
+
+        <!-- Sección inferior del footer -->
+        <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            
+            <!-- Derechos de autor -->
+            <div class="copyright">
+                <p style="color: #bdc3c7; margin: 0; font-size: 0.9rem;">
+                    &copy; 2024 Emprende Venezuela. Todos los derechos reservados.
+                </p>
+            </div>
+
+            <!-- Enlaces legales -->
+            <div class="legal-links" style="display: flex; gap: 1rem;">
+                <a href="#" style="color: #bdc3c7; text-decoration: none; font-size: 0.8rem;">Términos</a>
+                <a href="#" style="color: #bdc3c7; text-decoration: none; font-size: 0.8rem;">Privacidad</a>
+                <a href="#" style="color: #bdc3c7; text-decoration: none; font-size: 0.8rem;">Cookies</a>
+            </div>
+
+        </div>
+
+    </div>
+</footer>
+<script>
+    // Asistente Virtual con Dialogflow
+    let chatAbierto = false;
+    
+    function abrirAsistente() {
+        if (!chatAbierto) {
+            // Crear interfaz de chat
+            const chatHTML = `
+                <div id="chatModal" style="position: fixed; bottom: 80px; right: 20px; width: 350px; height: 500px; background: white; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.3); z-index: 1001; display: flex; flex-direction: column;">
+                    <div style="background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%); color: white; padding: 1rem; border-radius: 15px 15px 0 0; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>Asistente Virtual</strong>
+                            <div style="font-size: 0.8rem; opacity: 0.9;">Emprende Venezuela</div>
+                        </div>
+                        <button onclick="cerrarChat()" style="background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;">×</button>
+                    </div>
+                    
+                    <div id="chatMessages" style="flex: 1; padding: 1rem; overflow-y: auto; background: #f8f9fa;">
+                        <div style="background: var(--light); padding: 0.75rem; border-radius: 10px; margin-bottom: 1rem; font-size: 0.9rem;">
+                            <strong>Asistente:</strong> ¡Hola! Soy tu asistente de Emprende Venezuela. ¿En qué puedo ayudarte hoy? Puedo orientarte sobre trámites, créditos, formación y más.
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 1rem; border-top: 1px solid #eee;">
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" id="chatInput" placeholder="Escribe tu pregunta..." style="flex: 1; padding: 0.75rem; border: 1px solid #ddd; border-radius: 25px; outline: none;">
+                            <button onclick="enviarMensaje()" style="background: var(--accent); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer;">
+                                ➤
+                            </button>
+                        </div>
+                        <div style="font-size: 0.7rem; color: #666; margin-top: 0.5rem; text-align: center;">
+                            Presiona Enter para enviar
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', chatHTML);
+            chatAbierto = true;
+            
+            // Enfocar el input
+            document.getElementById('chatInput').focus();
+            
+            // Permitir enviar con Enter
+            document.getElementById('chatInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    enviarMensaje();
+                }
+            });
+        }
+    }
+    
+    function cerrarChat() {
+        const chatModal = document.getElementById('chatModal');
+        if (chatModal) {
+            chatModal.remove();
+            chatAbierto = false;
+        }
+    }
+    
+    function enviarMensaje() {
+        const input = document.getElementById('chatInput');
+        const mensaje = input.value.trim();
+        
+        if (mensaje) {
+            // Agregar mensaje del usuario
+            agregarMensaje('usuario', mensaje);
+            input.value = '';
+            
+            // Simular respuesta del asistente (luego se integrará con Dialogflow)
+            setTimeout(() => {
+                const respuesta = generarRespuesta(mensaje);
+                agregarMensaje('asistente', respuesta);
+            }, 1000);
+        }
+    }
+    
+    function agregarMensaje(tipo, texto) {
+        const chatMessages = document.getElementById('chatMessages');
+        const mensajeHTML = `
+            <div style="margin-bottom: 1rem; display: flex; justify-content: ${tipo === 'usuario' ? 'flex-end' : 'flex-start'};">
+                <div style="background: ${tipo === 'usuario' ? 'var(--accent)' : 'var(--light)'}; color: ${tipo === 'usuario' ? 'white' : 'var(--text)'}; padding: 0.75rem; border-radius: 15px; max-width: 80%; font-size: 0.9rem;">
+                    ${texto}
+                </div>
+            </div>
+        `;
+        
+        chatMessages.insertAdjacentHTML('beforeend', mensajeHTML);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    function generarRespuesta(mensaje) {
+        // Respuestas simuladas - Luego se integrará con Dialogflow
+        const mensajeLower = mensaje.toLowerCase();
+        
+        if (mensajeLower.includes('trámite') || mensajeLower.includes('registro') || mensajeLower.includes('sunacop')) {
+            return "Para trámites de registro, necesitarás: 1) Formulario SUNACOP, 2) Cédula de identidad, 3) Rif provisional. Te recomiendo visitar nuestra sección de Trámites para más detalles.";
+        } else if (mensajeLower.includes('crédito') || mensajeLower.includes('préstamo') || mensajeLower.includes('financiamiento')) {
+            return "Tenemos opciones de crédito en banca pública y privada. ¿Buscas para capital de trabajo, maquinaria o infraestructura? Revisa nuestra sección de Créditos para comparar opciones.";
+        } else if (mensajeLower.includes('formación') || mensajeLower.includes('curso') || mensajeLower.includes('capacitación')) {
+            return "Ofrecemos formación a través de INCES, Fundación Polar y otras instituciones. ¿Te interesa algún área específica como marketing, finanzas o gestión?";
+        } else if (mensajeLower.includes('exportación') || mensajeLower.includes('internacional')) {
+            return "Para exportar necesitas: 1) Registro en el REA, 2) Certificaciones de producto, 3) Logística de envío. Tenemos guías completas en la sección de Exportación.";
+        } else {
+            return "Entiendo que quieres saber sobre: '" + mensaje + "'. Te recomiendo explorar nuestras secciones especializadas o contarme más detalles para poder ayudarte mejor.";
+        }
+    }
+</script>
 </body>
 </html>
