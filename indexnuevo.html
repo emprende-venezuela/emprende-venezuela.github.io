@@ -1,1 +1,89 @@
-index
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emprende Venezuela</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Emprende Venezuela</h1>
+    <p>Inspirando a los nuevos emprendedores desde la palma de la mano</p>
+    <nav>
+      <ul>
+        <li><a href="#videos">Videos</a></li>
+        <li><a href="#biblioteca">Biblioteca</a></li>
+        <li><a href="#registro">Registro</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="#donar">Donar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="videos">
+    <h2>Videos por especialidad</h2>
+    <div class="video-grid">
+      <div>
+        <h3>Marketing Digital</h3>
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div>
+        <h3>Finanzas para emprendedores</h3>
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div>
+        <h3>Diseño de productos</h3>
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="biblioteca">
+    <h2>Biblioteca de recursos</h2>
+    <p>Descarga ebooks, guías y herramientas para tu emprendimiento.</p>
+    <ul>
+      <li><a href="ebooks/guia-emprender.pdf" download>Guía para emprender desde cero</a></li>
+      <li><a href="ebooks/marketing-digital.pdf" download>Marketing digital para emprendedores</a></li>
+    </ul>
+  </section>
+  <section id="registro">
+    <h2>Registro de emprendedores</h2>
+    <form action="https://formsubmit.co/tu-correo@ejemplo.com" method="POST">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required />
+
+      <label for="email">Correo electrónico:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="mensaje">Mensaje o especialidad:</label>
+      <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <section id="testimonios">
+    <h2>Testimonios</h2>
+    <blockquote>
+      “Emprender desde un teléfono parecía imposible, pero con Copilot y voluntad, todo cambió.”
+    </blockquote>
+    <blockquote>
+      “Este sitio me ayudó a entender que no necesito tenerlo todo para comenzar.”
+    </blockquote>
+  </section>
+
+  <section id="donar">
+    <h2>Apoya este proyecto</h2>
+    <p>Tu contribución ayuda a mantener y expandir esta plataforma para más emprendedores.</p>
+    <a href="https://www.paypal.com/donate?hosted_button_id=TU_ID_DE_PAYPAL" target="_blank">
+      <button>Donar vía PayPal</button>
+    </a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Emprende Venezuela. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
+
